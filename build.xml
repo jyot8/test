@@ -9,9 +9,9 @@
 		<property name="toolkit.home" value="C:\\Program Files (x86)\\IBM\\IntegrationToolkit90" />
 		<echo message="Toolkit at ${toolkit.home}" />
 		<!-- Workspace Directory -->
-		<property name="ant.bars.basedir" value="C:\\Jyoti\\Finnair\\IIB-WS" />
+		<property name="ant.bars.basedir" value="." />
 		<!-- <echo message="Workspace at ${ant.bars.basedir}" /> -->
-		<property name="workspaces.dir" value="C:\\Jyoti\\Finnair\\IIB-WS" />
+		<property name="workspaces.dir" value="." />
 		<!--Extract CVS Location -->
 		<property name="cvs.location" value="${cvslocation}" />
 		<echo message="CVS at ${cvs.location}" />
