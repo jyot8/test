@@ -10,15 +10,10 @@
 		<echo message="Toolkit at ${toolkit.home}" />
 		<!-- Workspace Directory -->
 		<property name="ant.bars.basedir" value="C:\\Windows\\System32\\config\\systemprofile\\AppData\\Local\\Jenkins.jenkins\\workspace" />
-		<!-- <echo message="Workspace at ${ant.bars.basedir}" /> -->
+		<echo message="Workspace at ${ant.bars.basedir}" />
 		<property name="workspaces.dir" value="C:\\Windows\\System32\\config\\systemprofile\\AppData\\Local\\Jenkins.jenkins\\workspace" />
-		<!--Extract CVS Location -->
-		<property name="cvs.location" value="${cvslocation}" />
-		<echo message="CVS at ${cvs.location}" />
-		<!--Extract CVS Location -->
-		<property name="cvs.rsh" value="${cvsRSH}" />
-		<echo message="CVSrsh at ${cvs.rsh}" />
-
+		<echo message="Workspace at ${workspaces.dir}" />
+		
 		<!-- Format Bar file name -->
 		<property name="bar.name" value="FUEL_ESLIP" />
 		<property name="version.num" value="V9"/>
@@ -52,42 +47,5 @@
 		<echo message="Bar built successfully ---" />
 	<!--	<antcall target="check.bar.creation"/> -->
 	  </target>
-	  
-	  <!--   Target to build the broker archive using mqsicreatebar  -->
-	
-	<target name="mqsicreatebar2.buildbar" unless="FUEL_ESLIP" >
-		
-		<echo message="Building Broker Archive file: FUEL_ESLIP" />
-		<exec executable="mqsipackagebar" failifexecutionfails="off" >
-			<arg value="-data" />
-			<arg value="${workspaces.dir}" />
-			<arg value="-b" />
-			<arg value="${barVersion}" />
-			<arg value="-cleanBuild" />
-			<arg value="-a" />
-			<arg value= "FUEL_ESLIP" />
-			<arg value="-deployAsSource" />
-			<arg value="-skipWSErrorCheck"/>
-		</exec>
-		<echo message="Bar built successfully ---" />
-	<!--	<antcall target="check.bar.creation"/> -->
-	  </target>
-	  
-	  <target name="run_mqsipackagebar" description="--> runs mqsipackagebar from an ant task">
-	  <echo message="inside mqsipakage bar---" />
-   <java classname="com.ibm.broker.config.appdev.FlowRendererBAR"
-      failonerror="true"
-      fork="true">
-		 <arg line="-w C:\\Jyoti\\Finnair\\IIB-WS"/>
-         <arg line="-a MyBAR.bar"/>
-         <arg line="-k FUEL_ESLIP"/>
-         <classpath>
-            <fileset dir="C:\Program Files\IBM\MQSI\9.0.0.2\classes">
-                <include name="*.jar"/>
-            </fileset>
-         </classpath>
-   </java>
-</target>
-
 	
 </project>
