@@ -55,7 +55,7 @@
 	  
 	  <!--   Target to build the broker archive using mqsicreatebar  -->
 	
-	<target name="mqsicreatebar1.buildbar" unless="FUEL_ESLIP" >
+	<target name="mqsicreatebar2.buildbar" unless="FUEL_ESLIP" >
 		
 		<echo message="Building Broker Archive file: FUEL_ESLIP" />
 		<exec executable="mqsipackagebar" failifexecutionfails="off" >
