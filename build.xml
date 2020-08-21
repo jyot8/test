@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<project name="project" default="run" basedir="." xmlns:ac="antlib:net.sf.antcontrib">
+	
+	<target name="run" description="Build Master Script">
+		
+		<!-- ToolKit Directory -->
+		<!-- Extract details from environment file -->
+		<!--<property file= "C:\IIB_Environment\IIB_set_Env" /> -->
+		<property name="toolkit.home" value="C:\\Program Files (x86)\\IBM\\IntegrationToolkit90" />
+		<echo message="Toolkit at ${toolkit.home}" />
+		<!-- Workspace Directory -->
+		<property name="ant.bars.basedir" value="C:\\Jyoti\\Finnair\\IIB-WS" />
+		<!-- <echo message="Workspace at ${ant.bars.basedir}" /> -->
+		<property name="workspaces.dir" value="C:\\Jyoti\\Finnair\\IIB-WS" />
+		<!--Extract CVS Location -->
+		<property name="cvs.location" value="${cvslocation}" />
+		<echo message="CVS at ${cvs.location}" />
+		<!--Extract CVS Location -->
+		<property name="cvs.rsh" value="${cvsRSH}" />
+		<echo message="CVSrsh at ${cvs.rsh}" />
+
+		<!-- Format Bar file name -->
+		<property name="bar.name" value="FUEL_ESLIP" />
+		<property name="version.num" value="V9"/>
+		<!-- <buildnumber file="build.num"/> -->
+		<tstamp>
+			<format property="DATE" pattern="yyyy-MM-dd" />
+		</tstamp>
+
+        <antcall target="mqsicreatebar.buildbar" />
+      
+</target>
+
+
+
+	         <!--   Target to build the broker archive using mqsicreatebar  -->
+	
+	<target name="mqsicreatebar.buildbar" unless="FUEL_ESLIP" >
+		
+		<echo message="Building Broker Archive file: FUEL_ESLIP" />
+		<exec executable="${toolkit.home}\mqsicreatebar.exe" failifexecutionfails="off" >
+			<arg value="-data" />
+			<arg value="${workspaces.dir}" />
+			<arg value="-b" />
+			<arg value="C:\ant\FuelESlip\FuelESlip.bar" />
+			<arg value="-cleanBuild" />
+			<arg value="-a" />
+			<arg value= "FUEL_ESLIP" />
+			<arg value="-deployAsSource" />
+			<arg value="-skipWSErrorCheck"/>
+		</exec>
+		<echo message="Bar built successfully ---" />
+	<!--	<antcall target="check.bar.creation"/> -->
+	  </target>
+	  
+	  <!--   Target to build the broker archive using mqsicreatebar  -->
+	
+	<target name="mqsicreatebar1.buildbar" unless="FUEL_ESLIP" >
+		
+		<echo message="Building Broker Archive file: FUEL_ESLIP" />
+		<exec executable="mqsipackagebar" failifexecutionfails="off" >
+			<arg value="-data" />
+			<arg value="${workspaces.dir}" />
+			<arg value="-b" />
+			<arg value="${barVersion}" />
+			<arg value="-cleanBuild" />
+			<arg value="-a" />
+			<arg value= "FUEL_ESLIP" />
+			<arg value="-deployAsSource" />
+			<arg value="-skipWSErrorCheck"/>
+		</exec>
+		<echo message="Bar built successfully ---" />
+	<!--	<antcall target="check.bar.creation"/> -->
+	  </target>
+	  
+	  <target name="run_mqsipackagebar" description="--> runs mqsipackagebar from an ant task">
+	  <echo message="inside mqsipakage bar---" />
+   <java classname="com.ibm.broker.config.appdev.FlowRendererBAR"
+      failonerror="true"
+      fork="true">
+		 <arg line="-w C:\\Jyoti\\Finnair\\IIB-WS"/>
+         <arg line="-a MyBAR.bar"/>
+         <arg line="-k FUEL_ESLIP"/>
+         <classpath>
+            <fileset dir="C:\Program Files\IBM\MQSI\9.0.0.2\classes">
+                <include name="*.jar"/>
+            </fileset>
+         </classpath>
+   </java>
+</target>
+
+	
+</project>
